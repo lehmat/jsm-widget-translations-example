@@ -1,4 +1,4 @@
-# JSM Widget Example
+# JSM Widget Translation Example
 
 ## Project Description
 
