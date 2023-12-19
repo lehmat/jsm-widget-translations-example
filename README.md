@@ -11,8 +11,10 @@ This repository contains example demonstrating how to customize the visible text
 The following texts in the JSM widget can be customized in this example:
 
 - "Learn About"
+- "load more"
 - "Contact us about"
 - "Submit"
+- "Thanks!"
 - "Optional"
 - "Your contact email"
 - "Powered By Jira Service Management"
