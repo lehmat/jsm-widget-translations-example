@@ -2,6 +2,8 @@ const translations = {
   optional: 'Optional',
   submit: 'Submit',
   YourContactEmail: 'Your contact email',
+  loadMore: 'load more',
+  thanks: 'Thanks!',
   addAttachment: 'Add attachment',
   placeholder: 'How can we help?',
   contactUsAbout: 'Contact us about',
@@ -32,11 +34,14 @@ async function translateEmailLabel(reactRoot) {
     }
   }
 }
-async function translateAddAttachment(reactRoot) {
+async function translateButtons(reactRoot) {
   const elements = reactRoot.querySelectorAll('.ak-button__appearance-link');
   for (let i = 0; i < elements.length; i++) {
     if (elements[i].textContent === 'Choose file') {
       elements[i].textContent = translations.addAttachment;
+    }
+    if (elements[i].textContent == 'Load more') {
+      elements[i].textContent = translations.loadMore;
     }
   }
 }
@@ -57,7 +62,7 @@ async function translateFooter(reactRoot) {
     }
   }
 }
-async function translateListHeaders(reactRoot) {
+async function translateH1Elements(reactRoot) {
   // Loop through all h1 elements and change the text if needed
   const h1Elements = reactRoot.querySelectorAll('h1');
   for (let i = 0; i < h1Elements.length; i++) {
@@ -69,13 +74,24 @@ async function translateListHeaders(reactRoot) {
     }
   }
 }
+async function translateH3Elements(reactRoot) {
+  const h3Elements = reactRoot.querySelectorAll('h3')
+  // Loop through all h3 elements
+  for (let i = 0; i < h3Elements.length; i++) {
+    // Check if the h3 element has the specific value
+    if (h3Elements[i].textContent == 'Thanks!') {
+      h3Elements[i].textContent = translations.thanks;
+    }
+  }
+},
 
 async function translateTexts(reactRoot) {
   translateHowCanWeHelp(reactRoot);
-  translateListHeaders(reactRoot);
+  translateH1Elements(reactRoot);
+  translateH3Elements(reactRoot);
   translateFooter(reactRoot);
   translateEmailLabel(reactRoot);
-  translateAddAttachment(reactRoot);
+  translateButtons(reactRoot);
   translateSubmitButton(reactRoot);
   translateOptionalText(reactRoot);
 }
