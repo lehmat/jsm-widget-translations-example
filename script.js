@@ -28,31 +28,18 @@ async function translateSubmitButton(reactRoot) {
   }
 }
 async function translateEmailLabel(reactRoot) {
-  const element = reactRoot.querySelector('label[for="email"]');
+  const element = reactRoot.querySelector('label[for="email"]:not([data-translated="true"])')
   if (element) {
-    const spanElement = element.querySelector('span:not([data-translated="true"])');
-    if (spanElement) {
-      spanElement.textContent = translations.YourContactEmail;
-      spanElement.setAttribute('data-translated', 'true');
-    }
+    element.innerHTML = element.innerHTML.replace(
+      'Your contact e-mail',
+      translations.YourContactEmail,
+    )
+    element.setAttribute('data-translated', 'true')
   }
 }
-async function translateButtons(reactRoot) {
-  const elements = reactRoot.querySelectorAll('.ak-button__appearance-link:not([data-translated="true"])');
-  for (let i = 0; i < elements.length; i++) {
-    if (elements[i].textContent === 'Choose file') {
-      elements[i].textContent = translations.addAttachment;
-      elements[i].setAttribute('data-translated', 'true');
 
-    }
-    if (elements[i].textContent == 'Load more') {
-      elements[i].textContent = translations.loadMore;
-      elements[i].setAttribute('data-translated', 'true');
-    }
-  }
-}
 async function translateHowCanWeHelp(reactRoot) {
-  const element = reactRoot.querySelector('.ak-field-text:not([data-translated="true"])');
+  const element = reactRoot.querySelector('[data-ds--text-field--input="true"]:not([data-translated="true"])');
   if (element) {
     if (element && element.placeholder === 'How can we help?') {
       element.placeholder = translations.placeholder;
@@ -70,39 +57,51 @@ async function translateFooter(reactRoot) {
     }
   }
 }
-async function translateH1Elements(reactRoot) {
+async function translateElements(reactRoot, element) {
   // Loop through all h1 elements and change the text if needed
-  const h1Elements = reactRoot.querySelectorAll('h1:not([data-translated="true"])');
-  for (let i = 0; i < h1Elements.length; i++) {
-    if (h1Elements[i].textContent === 'Contact us about') {
-      h1Elements[i].textContent = translations.contactUsAbout;
-      h1Elements[i].setAttribute('data-translated', 'true');
+  const elements = reactRoot.querySelectorAll(`${element}:not([data-translated="true"])`);
+  for (let i = 0; i < elements.length; i++) {
+    if (elements[i].textContent === 'Contact us about') {
+      elements[i].textContent = translations.contactUsAbout;
+      elements[i].setAttribute('data-translated', 'true');
     }
-    if (h1Elements[i].textContent === 'Learn about') {
-      h1Elements[i].textContent = translations.learnAbout;
-      h1Elements[i].setAttribute('data-translated', 'true');
+    if (elements[i].textContent === 'Learn about') {
+      elements[i].textContent = translations.learnAbout;
+      elements[i].setAttribute('data-translated', 'true');
+    }
+    if (elements[i].textContent == 'Thanks!') {
+      elements[i].textContent = translations.thanks;
+      elements[i].setAttribute('data-translated', 'true');
+    }
+    if (elements[i].textContent === 'Choose file') {
+      elements[i].textContent = translations.addAttachment;
+      elements[i].setAttribute('data-translated', 'true');
+
+    }
+    if (elements[i].textContent == 'Load more') {
+      elements[i].textContent = translations.loadMore;
+      elements[i].setAttribute('data-translated', 'true');
+    }
+    if (elements[i].textContent === 'Choose file') {
+      elements[i].textContent = translations.addAttachment;
+      elements[i].setAttribute('data-translated', 'true');
+
+    }
+    if (elements[i].textContent == 'Load more') {
+      elements[i].textContent = translations.loadMore;
+      elements[i].setAttribute('data-translated', 'true');
     }
   }
 }
-async function translateH3Elements(reactRoot) {
-  const h3Elements = reactRoot.querySelectorAll('h3:not([data-translated="true"])')
-  // Loop through all h3 elements
-  for (let i = 0; i < h3Elements.length; i++) {
-    // Check if the h3 element has the specific value
-    if (h3Elements[i].textContent == 'Thanks!') {
-      h3Elements[i].textContent = translations.thanks;
-      h3Elements[i].setAttribute('data-translated', 'true');
-    }
-  }
-},
 
 async function translateTexts(reactRoot) {
   translateHowCanWeHelp(reactRoot);
-  translateH1Elements(reactRoot);
-  translateH3Elements(reactRoot);
+  translateElements(reactRoot, 'h1');
+  translateElements(reactRoot, 'h2');
+  translateElements(reactRoot, 'h3');
+  translateElements(reactRoot, 'span');
   translateFooter(reactRoot);
   translateEmailLabel(reactRoot);
-  translateButtons(reactRoot);
   translateSubmitButton(reactRoot);
   translateOptionalText(reactRoot);
 }
